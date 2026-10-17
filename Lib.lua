@@ -1,3 +1,11 @@
+local function randomString(length)
+	local result = ""
+	for i = 1, length do
+		result = result .. string.char(math.random(97, 122))
+	end
+	return result
+end
+
 local lib = {}
 local TweenService = game:GetService("TweenService")
 
@@ -12,7 +20,24 @@ local UIPadding_1 = Instance.new("UIPadding")
 local UIListLayout_1 = Instance.new("UIListLayout")
 local UIPadding_2 = Instance.new("UIPadding")
 
-ScreenGui_1.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local allInstances = {
+	ScreenGui_1,
+	Main_1,
+	Template_1,
+	Title_1,
+	UIStroke_1,
+	Text_1,
+	UIStroke_2,
+	UIPadding_1,
+	UIListLayout_1,
+	UIPadding_2
+}
+
+for _, inst in ipairs(allInstances) do
+	inst.Name = randomString(15)
+end
+
+ScreenGui_1.Parent = gethui()
 
 Main_1.BackgroundTransparency = 1
 Main_1.Name = "Main"
