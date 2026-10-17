@@ -1,4 +1,10 @@
-local hui = gethui()
+if getgenv().__LOADED then
+	return warn("QuickLoader already loaded!")
+end
+
+getgenv().__LOADED = true
+
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/DRZ1NK/QuickLoader/refs/heads/main/Lib.luau"))()
 
 local ScreenGui_1 = Instance.new("ScreenGui")
 local Main_1 = Instance.new("Frame")
@@ -16,14 +22,14 @@ local UIListLayout_1 = Instance.new("UIListLayout")
 local UIStroke_5 = Instance.new("UIStroke")
 
 local function randomString(length)
-	local string = ""
+	local result = ""
 	for i = 1, length do
-		string = string .. string.char(math.random(97, 122))
+		result = result .. string.char(math.random(97, 122))
 	end
-	return string
+	return result
 end
 
-ScreenGui_1.Parent = hui
+ScreenGui_1.Parent = gethui()
 ScreenGui_1.Name = randomString(15)
 
 Main_1.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -109,14 +115,6 @@ for _, descendant in ipairs(ScreenGui_1:GetDescendants()) do
 	end
 end
 
-local function sendNotis(title, text, duration)
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = title or "No Text",
-		Text = text or "No Text",
-		Duration = duration or 2
-	})
-end
-
 local TweenService = game:GetService("TweenService")
 local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 
@@ -148,7 +146,7 @@ local function CreateBtn(Name, Text, URL)
 	button.BackgroundTransparency = 0.8
 	button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	button.TextColor3 = Color3.fromRGB(0, 0, 0)
-	
+
 	local stroke = Instance.new("UIStroke")
 	stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 	stroke.Color = Color3.fromRGB(0, 0, 0)
@@ -160,12 +158,10 @@ local function CreateBtn(Name, Text, URL)
 				loadstring(game:HttpGet(URL))()
 			end)
 			if not success then
-				sendNotis("Error", "Failed to run script: " .. tostring(err), 3)
+				lib.makenotis("Error", "Failed to run script: " .. tostring(err), 3)
 			end
 		else
-			sendNotis("Error", "URL not found or incorrect", 2)
+			lib.makenotis("Error", "URL not found or incorrect", 2)
 		end
 	end)
 end
-
-getgenv().AddButton = CreateBtn
