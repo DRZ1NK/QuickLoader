@@ -7,4 +7,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/DRZ1NK/QuickLoader/re
 getgenv().AddButton("Name", "Text", "URL")
 ```
 
-it has no buttons on its own so youll have to add your own
+it has no buttons on its own so youll have to add your own.
+You can also add more after execution.
