@@ -165,3 +165,5 @@ local function CreateBtn(Name, Text, URL)
 		end
 	end)
 end
+
+getgenv().AddButton = CreateBtn
