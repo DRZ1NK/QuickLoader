@@ -4,7 +4,7 @@ end
 
 getgenv().__LOADED = true
 
-local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/DRZ1NK/QuickLoader/refs/heads/main/Lib.luau"))()
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/DRZ1NK/QuickLoader/refs/heads/main/Lib.lua"))()
 
 local ScreenGui_1 = Instance.new("ScreenGui")
 local Main_1 = Instance.new("Frame")
